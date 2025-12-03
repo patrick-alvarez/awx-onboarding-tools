@@ -1,0 +1,26 @@
+{
+    "request_id": "{{$guid}}",
+    "beneficiary": {
+        "address": {
+            "city": "Munchen",
+            "country_code": "DE",
+            "postcode": "80333",
+            "street_address": "Köpenicker Straße 76, Brückenstraße 1, 10179 Munchen, Allemagne"
+        },
+        
+        "bank_details": {
+            "account_currency": "EUR",
+            "account_name": "John Walker",
+            "bank_country_code": "DE",
+            "iban": "DE02120300000000202051"
+        },
+        "company_name": "Airwallex Hotel",
+        "entity_type": "COMPANY",
+        "first_name": "Test",
+        "last_name": "McTest"
+    },
+    "transfer_methods": [
+        "LOCAL"
+    ],
+    "nickname": "2540_4121212"
+}

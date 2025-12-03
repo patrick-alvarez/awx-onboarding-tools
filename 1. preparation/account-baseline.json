@@ -1,0 +1,103 @@
+{
+    "account_details": {
+        "attachments": {
+            "additional_files": []
+        },
+        "business_details": {
+            "account_usage": {
+                "estimated_monthly_revenue": {
+                    "amount": "1000000",
+                    "currency": "EUR"
+                },
+                "product_reference": [
+                    "RECEIVE_TRANSFERS",
+                    "CONVERT_FUNDS",
+                    "MAKE_TRANSFERS",
+                    "ACCEPT_ONLINE_PAYMENTS"
+                ]
+            },
+            "attachments": {
+                "business_documents": [
+                    {
+                        "file_id": "NTUzNDhlNDUtYjIxYS00YTUyLWFkMDAtMzBhMjQ3MTQ4MDY4LHwsaG9uZ2tvbmcsfCxTdGFuZC5qcGdfMTc0MTY5MTYyMTI3Mw",
+                        "tag": "CERTIFICATE_OF_INCORPORATION"
+                    }
+                ]
+            },
+            "business_address": {
+                "address_line1": "{{$randomStreetAddress}}",                
+                "country_code": "DE",
+                "postcode": "58888",                
+                "suburb": "{{$randomCity}}"
+            },
+            "business_identifiers": [
+                {
+                    "number": "123456789",
+                    "type": "BRN"
+                },
+                {
+                    "country_code": "US",
+                    "number": "123456789",
+                    "type": "EIN"
+                }
+            ],
+            "business_name": "{{$randomCompanyName}} US",
+            "business_structure": "COMPANY",
+            "description_of_goods_or_services": "{{$randomLoremSentence}}",
+            "industry_category_code": "ICCV3_000300",
+            "operating_country": [
+                "US"
+            ],
+            "registration_address": {
+                "address_line1": "{{$randomStreetAddress}}",
+                "country_code": "US",
+                "postcode": "58888",
+                "state": "FL",
+                "suburb": "{{$randomCity}}"
+            },
+            "url": "https://www.google.com/"
+        },
+        "business_person_details": [
+            {
+                "attachments": {
+                    "business_person_documents": [
+                    ]
+                },
+                "date_of_birth": "1970-01-01",
+                "email": "{{$randomEmail}}",
+                "first_name": "{{$randomFirstName}}",
+                "identifications": {
+                    "primary": {
+                    }
+                },
+                "last_name": "{{$randomLastName}}",
+                "nationality": "US",
+                "residential_address": {
+                    "address_line1": "{{$randomStreetAddress}}",
+                    "country_code": "US",
+                    "postcode": "58888",
+                    "state": "FL",
+                    "suburb": "{{$randomCity}}"
+                },
+                "roles": [
+                    "DIRECTOR",
+                    "CONTROLLING_PERSON",
+                    "AUTHORISED_PERSON"
+                ]
+            }
+        ]
+    },
+    "identifier": "{{$guid}}",
+    "customer_agreements": {
+        "agreed_to_data_usage": true,
+        "agreed_to_terms_and_conditions": true,
+        "opt_in_for_marketing": false
+    },
+    "nickname": "{{$randomFullName}} EU",
+    "primary_contact": {
+        "attachments": {
+            "identity_files": []
+        },
+        "email": "{{$randomEmail}}"
+    }
+}
