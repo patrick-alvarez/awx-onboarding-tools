@@ -1,0 +1,542 @@
+{
+	"info": {
+		"_postman_id": "286ccdfe-e6f6-4a02-af1a-82ea21ab45d5",
+		"name": "KYC / KYB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Authentication",
+			"item": [
+				{
+					"name": "Obtain access token",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ab51c45a-87b8-4333-ad2e-e7cf0bf37c3e",
+								"exec": [
+									"const clientId = pm.environment.get(\"client_id\");",
+									"const apiKey = pm.environment.get(\"api_key\");",
+									"",
+									"if (clientId === \"\" || apiKey === \"\") {",
+									"    throw new Error(\"Please set the values for the variables 'clientId' or 'apiKey'.\");",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "3dfa9753-a147-4c58-b189-882ec104c51a",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Endpoint returns a token\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.token).to.be.a(\"string\")",
+									"});",
+									"",
+									"pm.environment.set(\"bearer_token_expires_at\", JSON.parse(responseBody).expires_at);",
+									"pm.environment.set(\"bearer_token\", JSON.parse(responseBody).token);"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "24808af8-3359-4155-9d8e-1c43867c9466",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-client-id",
+								"value": "{{client_id}}",
+								"type": "text"
+							},
+							{
+								"key": "x-api-key",
+								"value": "{{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": "{{base_url}}/api/v1/authentication/login"
+					},
+					"response": []
+				}
+			],
+			"id": "ce5d4ed7-9c46-451c-953a-203c2f5c70a1",
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "92372bbb-3341-4a7c-a024-93066a17b503",
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "00d2a4bf-8870-49f9-aece-546b90814416",
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "2. Create Account",
+			"item": [
+				{
+					"name": "Create an Account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5ec4213a-e4c4-4d66-ada4-b809cfd86890",
+								"exec": [
+									"pm.collectionVariables.set(\"connected_account_id\", JSON.parse(pm.response.text()).id);",
+									"pm.collectionVariables.set(\"enterprise_id\", JSON.parse(pm.response.text()).identifier);"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "6014b1ba-66da-4bb3-9609-db25ae9d029b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"account_details\": {\n        \"attachments\": {\n            \"additional_files\": []\n        },\n        \"business_details\": {\n            \"account_usage\": {\n                \"estimated_monthly_revenue\": {\n                    \"amount\": \"51341\",\n                    \"currency\": \"EUR\"\n                },\n                \"product_reference\": [\n                    \"RECEIVE_TRANSFERS\"\n                ]\n            },\n            \"attachments\": {\n                \"business_documents\": []\n            },\n            \"business_address\": {\n                \"address_line1\": \"Siebensterngasse 43\",\n                \"country_code\": \"AT\",\n                \"postcode\": \"1070\",\n                \"state\": \"Vienna\",\n                \"suburb\": \"Wien\"\n            },\n            \"business_identifiers\": [\n                {\n                    \"country_code\": \"AT\",\n                    \"number\": \"FN363429f\",\n                    \"type\": \"BRN\"\n                }\n            ],\n            \"business_name\": \"Schlu BetriebsgmbH\",\n            \"business_structure\": \"COMPANY\",\n            \"description_of_goods_or_services\": \"Boutique hotel providing accommodation and hospitality services in Vienna, Austria\",\n            \"industry_category_code\": \"ICCV3_000300\",\n            \"operating_country\": [\n                \"AT\"\n            ],\n            \"registration_address\": {\n                \"address_line1\": \"Siebensterngasse 43\",\n                \"country_code\": \"AT\",\n                \"postcode\": \"1070\",\n                \"state\": \"Vienna\",\n                \"suburb\": \"Wien\"\n            },\n            \"url\": \"https://www.hotelkugel.at/\"\n        },\n        \"business_person_details\": [\n            {\n                \"attachments\": {\n                    \"business_person_documents\": []\n                },\n                \"date_of_birth\": \"1952-06-14\",\n                \"email\": \"office@hotelkugel.at\",\n                \"first_name\": \"Johannes\",\n                \"identifications\": {\n                    \"primary\": {\n                    }\n                },\n                \"last_name\": \"Roller\",\n                \"nationality\": \"AT\",\n                \"residential_address\": {\n                    \"address_line1\": \"Siebensterngasse 43\",\n                    \"country_code\": \"AT\",\n                    \"postcode\": \"1070\",\n                    \"state\": \"Vienna\",\n                    \"suburb\": \"Wien\"\n                },\n                \"roles\": [\n                    \"DIRECTOR\",\n                    \"BENEFICIAL_OWNER\",\n                    \"AUTHORISED_PERSON\"\n                ]\n            }\n        ]\n    },\n    \"identifier\": \"8ab3899b-eb04-48c3-ac02-ab2900be1751\",\n    \"customer_agreements\": {\n        \"agreed_to_data_usage\": true,\n        \"agreed_to_terms_and_conditions\": true,\n        \"opt_in_for_marketing\": false\n    },\n    \"nickname\": \"Boutique Hotel Kugel Wien\",\n    \"primary_contact\": {\n        \"attachments\": {\n            \"identity_files\": []\n        },\n        \"email\": \"office@hotelkugel.at\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/api/v1/accounts/create"
+					},
+					"response": []
+				}
+			],
+			"id": "ea231471-5363-4e6e-ae86-ddd505044ce1"
+		},
+		{
+			"name": "3. KYC Flow",
+			"item": [
+				{
+					"name": "A. Create KYC Hosted Flow",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "20f9d1e4-648b-48aa-87cc-a2d32c8f3856",
+								"exec": [
+									"pm.collectionVariables.set(\"kyc_flow_id\", JSON.parse(pm.response.text()).id);"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "ba298391-3f4b-4f1a-8969-6436c1b88e19",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n     \"account_id\": \"{{connected_account_id}}\",\n     \"template\": \"{{kyc_template_id}}\",//KYC Template\n     \"return_url\": \"https://www.mews.com/en\",\n     \"error_url\": \"https://www.mews.com/en/error\",\n     \"metadata\": {}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/api/v1/hosted_flows/create"
+					},
+					"response": []
+				},
+				{
+					"name": "B. Authorize KYC Flow",
+					"id": "e21c5b78-98cb-4d15-a8b9-59ab507f2794",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"identity\": \"{{enterprise_id}}\" // enterprise_id\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/hosted_flows/:kyc_flow_id/authorize",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"hosted_flows",
+								":kyc_flow_id",
+								"authorize"
+							],
+							"variable": [
+								{
+									"key": "kyc_flow_id",
+									"value": "{{kyc_flow_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "ab85a468-898e-4bcf-ae99-480d1c9ecb0c"
+		},
+		{
+			"name": "4. KYB Flow",
+			"item": [
+				{
+					"name": "A. Create KYB Flow",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c6c119c7-ebab-4d61-918d-06aaf5a505d4",
+								"exec": [
+									"pm.collectionVariables.set(\"kyb_flow_id\", JSON.parse(pm.response.text()).id);"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "5ad16e94-7a44-46ea-8e21-ef67473ad50f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"account_id\": \"{{connected_account_id}}\",\n    \"template\": \"{{kyb_template_id}}\", //KYB Template\n    \"return_url\": \"https://www.mews.com/en\",\n    \"error_url\": \"https://www.mews.com/en/error\",\n    \"metadata\": {}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/api/v1/hosted_flows/create"
+					},
+					"response": []
+				},
+				{
+					"name": "B. Authorize KYB Flow",
+					"id": "f834d2af-7f6b-480a-8f97-127ea1f89854",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"identity\": \"{{enterprise_id}}\" // enterprise_id\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/hosted_flows/:kyb_flow_id/authorize",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"hosted_flows",
+								":kyb_flow_id",
+								"authorize"
+							],
+							"variable": [
+								{
+									"key": "kyb_flow_id",
+									"value": "{{kyb_flow_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "6279ebc0-3db9-48cb-857c-3a26e84d7d8b"
+		},
+		{
+			"name": "5. Verifcation & Status Check",
+			"item": [
+				{
+					"name": "Get Account Details",
+					"id": "7c504b11-5c6a-4865-aa74-cc51087f25d6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base_url}}/api/v1/accounts/{{connected_account_id}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Get KYC Flow Status",
+					"id": "68c94cb3-1032-42e1-9d00-5a267630e1d9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/hosted_flows/:kyc_flow_id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"hosted_flows",
+								":kyc_flow_id"
+							],
+							"variable": [
+								{
+									"key": "kyc_flow_id",
+									"value": "{{kyc_flow_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get KYB Flow Status",
+					"id": "565bc87e-af51-4432-8a8c-1742be3bd5f3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/hosted_flows/:kyb_flow_id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"hosted_flows",
+								":kyb_flow_id"
+							],
+							"variable": [
+								{
+									"key": "kyb_flow_id",
+									"value": "{{kyb_flow_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "7738342b-ba6d-47dd-9606-b503f2b40332"
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": "{{bearer_token}}"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "34a8e0a5-9bd8-472d-a9b3-4a0ea5e621d1",
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					"/************************************************",
+					" * This collection pre-request script runs before the request one.",
+					" ***********************************************/",
+					"",
+					"// Set API version",
+					"if (typeof pm.environment.get(\"apiVersion\") !== 'undefined')",
+					"    pm.request.headers.add({key: \"x-api-version\", value: pm.environment.get(\"apiVersion\")});",
+					"",
+					"// Global variables and functions",
+					"BASE_URL = pm.environment.get(\"base_url\");",
+					"console.log(BASE_URL)",
+					"",
+					"UTILITY = {",
+					"    getRequestHeader: function () {",
+					"        let headers_json = { \"Authorization\": \"Bearer \" + pm.environment.get(\"bearer_token\") };",
+					"",
+					"        if (typeof pm.environment.get(\"apiVersion\") !== 'undefined')",
+					"            headers_json[\"x-api-version\"] = pm.environment.get(\"apiVersion\");",
+					"",
+					"        if (pm.request.headers.find((x) => x.key === \"x-on-behalf-of\") === undefined) {",
+					"            throw Error(\"Missing 'x-on-behalf-of' in the HTTP Header.\")",
+					"        }",
+					"        else if (pm.request.headers.find((x) => x.key === \"x-on-behalf-of\" && x.disabled === true)) {",
+					"            return headers_json;",
+					"        }",
+					"        else {",
+					"            let connectedAccountId = pm.request.headers.find((x) => x.key === \"x-on-behalf-of\").value;",
+					"            connectedAccountId = connectedAccountId === \"{{connected_account_id}}\" ? pm.variables.get(\"connected_account_id\") : connectedAccountId;",
+					"",
+					"            headers_json[\"x-on-behalf-of\"] = connectedAccountId;",
+					"            return headers_json;",
+					"        }",
+					"    }",
+					"};",
+					"",
+					"// Initialize environment variables. ",
+					"if (typeof pm.variables.get(\"connected_account_id\") === 'undefined')",
+					"    pm.environment.set(\"connected_account_id\", \"\");",
+					"",
+					"// Test the bearer_token expiry.",
+					"if (\"/\" + pm.request.url.path.join(\"/\") === \"/api/v1/authentication/login\")",
+					"    return;",
+					"",
+					"let loginUrl = BASE_URL + \"/api/v1/authentication/login\";",
+					"console.info(`bearer_token invalid, calling ${loginUrl} to refresh...`);",
+					"",
+					"// Obtain access token, before each request.",
+					"let clientId = pm.environment.get(\"client_id\");",
+					"let apiKey = pm.environment.get(\"api_key\");",
+					"",
+					"if (clientId === \"\" || apiKey === \"\") {",
+					"    throw new Error(\"Please set the values for the variables 'client_id' or 'api_key'.\");",
+					"}",
+					"",
+					"pm.sendRequest({",
+					"    url: loginUrl,",
+					"    method: \"POST\",",
+					"    header: {",
+					"        \"x-client-id\": clientId,",
+					"        \"x-api-key\": apiKey",
+					"    }",
+					"}, function (err, res) {",
+					"    pm.environment.set(\"bearer_token_expires_at\", res.json().expires_at);",
+					"    pm.environment.set(\"bearer_token\", res.json().token);",
+					"",
+					"    // pm.sendRequest() is asynchronous, so only execute the function after the bearer_token is set.",
+					"    executeWithValidBearerToken(BASE_URL);",
+					"});",
+					"",
+					"// Encode query parameters, e.g. 2021-12-21T18:50:00+08:00 -> 2021-12-21T18%3A50%3A00%2B08%3A00.",
+					"pm.request.url.query.filter((x) => x.disabled === undefined).forEach((x) => x.value = encodeURIComponent(x.value));",
+					"",
+					"function executeWithValidBearerToken(baseUrl) {",
+					"    if (pm.environment.get(\"connected_account_id\") === \"\") {",
+					"        if (pm.request.headers.find((x) => x.key === \"x-on-behalf-of\" && (x.disabled === undefined || x.disabled === false))) {",
+					"            request_url = baseUrl + \"/api/v1/accounts\";",
+					"            console.warn(`HTTP Header 'x-on-behalf-of' is on, but the environment variable 'connected_account_id' is not set, calling ${request_url} to default it.`);",
+					"",
+					"            pm.sendRequest({",
+					"                url: request_url,",
+					"                method: \"GET\",",
+					"                header: { \"Authorization\": \"Bearer \" + pm.environment.get(\"bearer_token\") }",
+					"            }, function (err, res) {",
+					"                active_account = res.json().items.find((x) => x.status === \"ACTIVE\");",
+					"                if (active_account != undefined) {",
+					"                    console.info(`Defaulting 'connected_account_id' to the first ACTIVE account ${active_account.id}`);",
+					"                    pm.environment.set(\"connected_account_id\", active_account.id);",
+					"                }",
+					"                else {",
+					"                    throw new Error(\"Environment variable 'connected_account_id' is not set, and cannot set a default, as there is no ACTIVE account returned.\");",
+					"                }",
+					"            });",
+					"        }",
+					"    }",
+					"}"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "976f6e47-2c6c-4573-a9d3-5eaecbee1120",
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "connected_account_id",
+			"value": ""
+		},
+		{
+			"key": "enterprise_id",
+			"value": ""
+		},
+		{
+			"key": "kyc_flow_id",
+			"value": ""
+		},
+		{
+			"key": "kyb_flow_id",
+			"value": ""
+		}
+	]
+}
