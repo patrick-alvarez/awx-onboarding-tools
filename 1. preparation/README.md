@@ -16,7 +16,13 @@ cd awx-onboarding-tools
 - Save it as `WT KYC-KYB(KYC-KYB).csv`
 - Place the CSV file in the `/1. preparation` folder
 
-### 3. Generate the Onboarding JSON Object
+### 3. Give your agent the context
+Use your agentic IDE (e.g., Cursor) with the following prompt:
+```
+Context: @1. preparation/summary.md
+```
+
+### 4. Generate the Onboarding JSON Object
 Use your agentic IDE (e.g., Cursor) with the following prompt:
 
 ```
@@ -30,7 +36,7 @@ Generate the onboarding json for Boutique Hotel Kugel Wien using WT KYC-KYB(KYC-
 
 This will create a file named `HotelName.json` in the `/1. preparation/output` directory.
 
-### 4. Generate the Beneficiary Request JSON Object
+### 5. Generate the Beneficiary Request JSON Object
 Use your agentic IDE with the following prompt:
 
 ```
@@ -44,7 +50,7 @@ Generate the beneficiary json for Boutique Hotel Kugel Wien using WT KYC-KYB(KYC
 
 This will create a file named `HotelNameBeneficiary.json` in the `/1. preparation/output` directory.
 
-### 5. Ready to Onboard!
+### 6. Ready to Onboard!
 You're now ready to perform the KYC and KYB onboarding via Postman using the generated JSON files.
 
 ## Additional Resources
