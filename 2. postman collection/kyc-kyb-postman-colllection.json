@@ -319,24 +319,23 @@
 			"name": "5. Add Beneficiary",
 			"item": [
 				{
-					"name": "New Request",
+					"name": "Create Beneficiary",
 					"id": "28e1cb44-4ab1-4abc-a9fa-f95cdaf6b114",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [
 							{
 								"key": "x-on-behalf-of",
 								"value": "{{connected_account_id}}",
-								"type": "text",
-								"disabled": true
+								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"request_id\": \"{{$guid}}\",\n    \"beneficiary\": {\n        \"address\": {\n            \"city\": \"Vienna\",\n            \"country_code\": \"AT\",\n            \"postcode\": \"1070\",\n            \"street_address\": \"Siebensterngasse 43\"\n        },\n        \"bank_details\": {\n            \"account_currency\": \"EUR\",\n            \"account_name\": \"Boutique Hotel Kugel Wien\",\n            \"bank_country_code\": \"AT\",\n            \"iban\": \"AT282011129514456701\"\n        },\n        \"company_name\": \"Schlu BetriebsgmbH\",\n        \"entity_type\": \"COMPANY\",\n        \"first_name\": \"Johannes\",\n        \"last_name\": \"Roller\"\n    },\n    \"transfer_methods\": [\n        \"LOCAL\"\n    ],\n    \"nickname\": \"Boutique Hotel Kugel Wien\"\n}\n// Enterprise ID: 8ab3899b-eb04-48c3-ac02-ab2900be1751",
+							"raw": "{\n    \"beneficiary\": {\n        \"address\": {\n            \"city\": \"Vienna\",\n            \"country_code\": \"AT\",\n            \"postcode\": \"1070\",\n            \"street_address\": \"Siebensterngasse 43\"\n        },\n        \"bank_details\": {\n            \"account_currency\": \"EUR\",\n            \"account_name\": \"Boutique Hotel Kugel Wien\",\n            \"bank_country_code\": \"AT\",\n            \"iban\": \"AT282011129514456701\"\n        },\n        \"company_name\": \"Schlu BetriebsgmbH\",\n        \"entity_type\": \"COMPANY\",\n        \"first_name\": \"Johannes\",\n        \"last_name\": \"Roller\"\n    },\n    \"transfer_methods\": [\n        \"LOCAL\"\n    ],\n    \"nickname\": \"Boutique Hotel Kugel Wien\"\n}\n// Enterprise ID: 8ab3899b-eb04-48c3-ac02-ab2900be1751",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -440,7 +439,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "41264cf6-ae2f-417c-b979-a7743c7f3890",
+				"id": "65a91fc8-2458-4981-9349-23b83e5dd73b",
 				"type": "text/javascript",
 				"packages": {},
 				"requests": {},
@@ -546,7 +545,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "1dc7c697-309f-481e-a6c7-dfedaf3c2857",
+				"id": "c014fda2-ab17-47bb-afe1-7ccfebb9c715",
 				"type": "text/javascript",
 				"packages": {},
 				"requests": {},
