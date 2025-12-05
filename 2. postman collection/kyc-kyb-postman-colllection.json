@@ -351,7 +351,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"beneficiary\": {\n        \"address\": {\n            \"city\": \"Vienna\",\n            \"country_code\": \"AT\",\n            \"postcode\": \"1070\",\n            \"street_address\": \"Siebensterngasse 43\"\n        },\n        \"bank_details\": {\n            \"account_currency\": \"EUR\",\n            \"account_name\": \"Boutique Hotel Kugel Wien\",\n            \"bank_country_code\": \"AT\",\n            \"iban\": \"AT282011129514456701\"\n        },\n        \"company_name\": \"Schlu BetriebsgmbH\",\n        \"entity_type\": \"COMPANY\",\n        \"first_name\": \"Johannes\",\n        \"last_name\": \"Roller\"\n    },\n    \"transfer_methods\": [\n        \"LOCAL\"\n    ],\n    \"nickname\": \"Boutique Hotel Kugel Wien\"\n}\n// Enterprise ID: 8ab3899b-eb04-48c3-ac02-ab2900be1751",
+							"raw": "{\n    \"beneficiary\": {\n        \"address\": {\n            \"city\": \"Vienna\",\n            \"country_code\": \"AT\",\n            \"postcode\": \"1070\",\n            \"street_address\": \"Siebensterngasse 43\"\n        },\n        \"bank_details\": {\n            \"account_currency\": \"EUR\",\n            \"account_name\": \"Boutique Hotel Kugel Wien\",\n            \"bank_country_code\": \"AT\",\n            \"iban\": \"AT282011129514456701\"\n        },\n        \"company_name\": \"Schlu BetriebsgmbH\",\n        \"entity_type\": \"COMPANY\",\n        \"first_name\": \"Johannes\",\n        \"last_name\": \"Roller\"\n    },\n    \"transfer_methods\": [\n        \"LOCAL\"\n    ],\n    \"nickname\": \"Boutique Hotel Kugel Wien\"\n}\n// Enterprise ID: 8ab3899b-eb04-48c3-ac02-ab2900be1751\n\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -394,6 +394,18 @@
 							}
 						],
 						"url": "{{base_url}}/api/v1/beneficiaries"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Beneficiary",
+					"id": "73c36d88-a6d8-4679-a7d0-ff23dd19b4f6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": []
 					},
 					"response": []
 				}
@@ -490,7 +502,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "2d33189c-9a2f-443e-8600-0f3322bf0834",
+				"id": "f56e3a70-371a-4b0b-a0e7-793e4e730266",
 				"type": "text/javascript",
 				"packages": {},
 				"requests": {},
@@ -596,7 +608,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "9b53e142-bd0b-43dd-bb9e-e27bb4a54588",
+				"id": "bd15274c-c515-4964-bae5-fc1eaced887f",
 				"type": "text/javascript",
 				"packages": {},
 				"requests": {},
