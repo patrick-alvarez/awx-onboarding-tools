@@ -316,7 +316,42 @@
 			"id": "6279ebc0-3db9-48cb-857c-3a26e84d7d8b"
 		},
 		{
-			"name": "5. Verifcation & Status Check",
+			"name": "5. Add Beneficiary",
+			"item": [
+				{
+					"name": "New Request",
+					"id": "28e1cb44-4ab1-4abc-a9fa-f95cdaf6b114",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-on-behalf-of",
+								"value": "{{connected_account_id}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"request_id\": \"{{$guid}}\",\n    \"beneficiary\": {\n        \"address\": {\n            \"city\": \"Vienna\",\n            \"country_code\": \"AT\",\n            \"postcode\": \"1070\",\n            \"street_address\": \"Siebensterngasse 43\"\n        },\n        \"bank_details\": {\n            \"account_currency\": \"EUR\",\n            \"account_name\": \"Boutique Hotel Kugel Wien\",\n            \"bank_country_code\": \"AT\",\n            \"iban\": \"AT282011129514456701\"\n        },\n        \"company_name\": \"Schlu BetriebsgmbH\",\n        \"entity_type\": \"COMPANY\",\n        \"first_name\": \"Johannes\",\n        \"last_name\": \"Roller\"\n    },\n    \"transfer_methods\": [\n        \"LOCAL\"\n    ],\n    \"nickname\": \"Boutique Hotel Kugel Wien\"\n}\n// Enterprise ID: 8ab3899b-eb04-48c3-ac02-ab2900be1751",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base_url}}/api/v1/beneficiaries/create"
+					},
+					"response": []
+				}
+			],
+			"id": "a9670f25-9dc7-480b-b4d7-6cbcf187983f"
+		},
+		{
+			"name": "6. Verifcation & Status Check",
 			"item": [
 				{
 					"name": "Get Account Details",
