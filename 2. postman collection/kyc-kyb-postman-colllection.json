@@ -320,6 +320,22 @@
 			"item": [
 				{
 					"name": "Create Beneficiary",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5ab48e69-2ce3-4b72-8d1e-4e9664d34c49",
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
 					"id": "28e1cb44-4ab1-4abc-a9fa-f95cdaf6b114",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -343,6 +359,41 @@
 							}
 						},
 						"url": "{{base_url}}/api/v1/beneficiaries/create"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Beneficiaries",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "377ecda8-471c-4a6a-ad61-53a50bb89700",
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"id": "fd83f0fe-3084-421a-884a-2bf479b280d1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-on-behalf-of",
+								"value": "{{connected_account_id}}",
+								"type": "text"
+							}
+						],
+						"url": "{{base_url}}/api/v1/beneficiaries"
 					},
 					"response": []
 				}
