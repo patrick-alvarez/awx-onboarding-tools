@@ -404,8 +404,27 @@
 						"disableBodyPruning": true
 					},
 					"request": {
-						"method": "GET",
-						"header": []
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/beneficiaries/:id/delete",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"beneficiaries",
+								":id",
+								"delete"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "19c2ffa1-f2a8-49bd-91ae-98f2d43db0c4"
+								}
+							]
+						}
 					},
 					"response": []
 				}
