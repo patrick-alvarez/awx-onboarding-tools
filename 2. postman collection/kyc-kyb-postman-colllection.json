@@ -521,7 +521,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "44f2d493-127d-48f1-ab15-f53e5507a8d1",
+				"id": "5f68ce3e-82c2-49a6-8a33-75c5233b3606",
 				"type": "text/javascript",
 				"packages": {},
 				"requests": {},
@@ -627,7 +627,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "ad1f9893-fc2d-41d6-a794-7794294a050e",
+				"id": "c617a98b-0f37-4b67-ac82-205ca9e3642f",
 				"type": "text/javascript",
 				"packages": {},
 				"requests": {},
